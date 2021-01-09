@@ -42,6 +42,7 @@ public class ThirdTask {
     }
 
     //=================================================_ADD_$$$_========================================================
+
     public String[] add$(String[] strArray, int wordLength) {
         if (strArray.length == 0) {
             throw new IllegalArgumentException("Array cannot be empty.");
@@ -58,4 +59,47 @@ public class ThirdTask {
         }
         return strArray;
     }
+
+    //=================================================_Add_Space_After_Symbol_=========================================
+    public String addSpaceAfterSymbol(String str) {
+        String symbols = ".,!?;:-\"/()";
+        String result = "";
+        int symbolIndex = -1;
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < symbols.length(); j++) {
+                if (str.charAt(i) == symbols.charAt(j)) {
+                    symbolIndex = i;
+                }
+            }
+            result += str.charAt(i);
+
+            if (symbolIndex == str.length() - 1) {
+                result += ' ';
+                symbolIndex = -1;
+            } else if (str.charAt(symbolIndex + 1) != ' ' && symbolIndex >= 0) {
+                result += ' ';
+                symbolIndex = -1;
+            }
+        }
+
+        return result;
+    }
+
+    //=================================================Left only one type symbol========================================
+//    public String leftOnlyOneTypeSymbolTest(String str) {
+//        char[] input = str.toCharArray();
+//        char[] output = new char[input.length];
+//        String result = "";
+//        for (int i = 0; i < input.length; i++) {
+//            for (int j = 0; j < input.length; j++) {
+//
+//            }
+//        }
+//        for (char ch: output) {
+//            result += ch;
+//        }
+//
+//        return result;
+//    }
+
 }

@@ -153,25 +153,48 @@ public class ThirdTaskTest {
     }
     //=================================================Add space after symbol===========================================
 
-//    static Stream<Arguments> addSpaceAfterSymbolTest() {
+    static Stream<Arguments> addSpaceAfterSymbolTest() {
+        return Stream.of(
+                arguments("", ""),
+                arguments("Five", "Five"),
+                arguments("Five one two", "Five one two"),
+                arguments("Five,one-two!", "Five, one- two! "),
+                arguments("Five, one-two!3 Tree onE", "Five, one- two! 3 Tree onE"),
+                arguments("Five, one-two!3 Tree,one 1", "Five, one- two! 3 Tree, one 1"),
+                arguments("Five, one-two!Eight nine twenty too to five,", "Five, one- two! Eight nine twenty too to five, "),
+                arguments("1234,56789", "1234, 56789"),
+                arguments("12345678910 ,1234567890", "12345678910 , 1234567890"),
+                arguments("/%,.';:@!?#$^&*","/ %, . '; : @! ? #$^&*"),
+                arguments("RESPONSE @ ACCEPT ... SELECT ! QUEUE_", "RESPONSE @ ACCEPT . . . SELECT ! QUEUE_")
+        );
+    }
+    @ParameterizedTest(name = "Add space after symbol. Input data is {0}, {1}")
+    @MethodSource("addSpaceAfterSymbolTest")
+    void addSpaceAfterSymbolTest_1(String str, String expected) {
+        String actual = thirdTask.addSpaceAfterSymbol(str);
+        assertEquals(expected, actual);
+    }
+    //=================================================Left only one type symbol========================================
+//
+//    static Stream<Arguments> leftOnlyOneTypeSymbolTest() {
 //        return Stream.of(
 //                arguments("", ""),
 //                arguments("Five", "Five"),
-//                arguments("Five one two", "Five one two"),
-//                arguments("Five,one-two!", "Five, one- two! "),
-//                arguments("Five, one-two!3 Tree onE", "Five, one-two! 3 Tree onE"),
-//                arguments("Five, one-two!3 Tree,one 1", "Five, one-two! 3 Tree, one 1"),
-//                arguments("Five, one-two!Eight nine twenty too to five,", "Five, one-two! Eight nine twenty too to five, "),
-//                arguments("1234,56789", "1234, 56789"),
-//                arguments("12345678910 ,1234567890", "12345678910 , 1234567890"),
-//                arguments("/,.';:!?@#$%^&*","/ , . ' ; : ! ? @ # $ % ^ & * "),
-//                arguments("RESPONSE @ ACCEPT ... SELECT ! QUEUE_  ", "RESPONSE @ ACCEPT ... SELECT ! ")
+//                arguments("Five one two", "Five ontw"),
+//                arguments("Five, one-two!", "Five, on-tw!"),
+//                arguments("Five, one-two!3 Tree onE", "Five, on-tw!3TrE"),
+//                arguments("Five, one-two!3 Tree,one 1", "Five, on-tw!3Tr,1"),
+//                arguments("Five, one-two!Eight nine twenty too to five,", "Five, on-tw!Eghy"),
+//                arguments("1234, 56789", "1234, 56789"),
+//                arguments("12345678910 ,1234567890", "12345678910 ,"),
+//                arguments("/%,.';:@!?#$^&*","/%,.';:@!?#$^&*"),
+//                arguments("RESPONSE @ ACCEPT ... SELECT ! QUEUE_", "RESPONS @ACTL!QU_")
 //        );
 //    }
 //    @ParameterizedTest(name = "Add space after symbol. Input data is {0}, {1}")
-//    @MethodSource("addSpaceAfterSymbolTest")
-//    void addSpaceAfterSymbolTest_1(String str, String expected) {
-//        String actual = thirdTask.addSpaceAfterSymbol(str);
+//    @MethodSource("leftOnlyOneTypeSymbolTest")
+//    void leftOnlyOneTypeSymbolTest_1(String str, String expected) {
+//        String actual = thirdTask.leftOnlyOneTypeSymbolTest(str);
 //        assertEquals(expected, actual);
 //    }
 
